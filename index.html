@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://geodata.solutions/includes/countrystatecity.js"></script>
+</head>
+
+<body>
+    <form id="reg" method="post">
+        <input type="text" name="u" placeholder="username"><br>
+        <input type="password" name="p" placeholder="password"><br>
+        <select name="country" class="countries" id="countryId">
+            <option value="">Select Country</option>
+        </select><br>
+        <select name="state" class="states" id="stateId">
+            <option value="">Select State</option>
+        </select><br>
+        <select name="city" class="cities" id="cityId">
+            <option value="">Select City</option>
+        </select><br>
+        <button type="submit">Register</button>
+    </form>
+
+</body>
+<script>
+    $("#reg").submit((e) => {
+        console.log($('#reg').serialize())
+        $.ajax({
+            url: 'http://localhost:3000/auth/reg',
+            type: 'post',
+            dataType: 'json',
+            data: $('#reg').serialize(),
+            success: (data) => {
+                alert(data)
+            },
+            error: (er) => {
+                alert(er.responseText)
+            }
+        });
+        e.preventDefault();
+    });
+</script>
+</html> 
